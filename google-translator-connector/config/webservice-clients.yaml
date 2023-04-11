@@ -1,0 +1,6 @@
+WebServiceClients:
+  Google Translator API:
+    Id: 18755907AF014BEB
+    WsdlUrl: https://translation.googleapis.com/language/translate/v2?key=AIzaSyCdZUS5nEOU8bMOmt94CZUpvSuIiRWGF2U
+    WsCallLibrary: CXF
+    Endpoints: {}

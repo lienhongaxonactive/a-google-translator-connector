@@ -1,0 +1,5 @@
+GetSupportedLanguagesData #class
+google.translate #namespace
+supportedLanguages java.util.List<google.translate.functional.Language> #field
+apiKey String #field
+displayLanguage String #field

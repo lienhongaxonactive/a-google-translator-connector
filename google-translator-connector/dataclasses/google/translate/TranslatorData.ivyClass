@@ -1,0 +1,7 @@
+TranslatorData #class
+google.translate #namespace
+targetLanguage String #field
+sourceLanguage String #field
+result String #field
+translateText String #field
+apiKey String #field

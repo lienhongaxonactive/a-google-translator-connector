@@ -1,0 +1,14 @@
+GoogleTranslatorData #class
+google.translate.connector.GoogleTranslator #namespace
+result String #field
+result PERSISTENT #fieldModifier
+sourceLanguage String #field
+sourceLanguage PERSISTENT #fieldModifier
+targetLanguage String #field
+targetLanguage PERSISTENT #fieldModifier
+apiKey String #field
+apiKey PERSISTENT #fieldModifier
+translateText String #field
+translateText PERSISTENT #fieldModifier
+languages java.util.List<google.translate.functional.Language> #field
+languages PERSISTENT #fieldModifier

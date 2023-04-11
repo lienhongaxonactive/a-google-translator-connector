@@ -1,0 +1,47 @@
+{
+  "format" : "10.0.0",
+  "id" : "187455A0E1D3E2F8",
+  "config" : {
+    "data" : "google.translator.connector.demo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "start.ivp",
+      "config" : {
+        "callSignature" : "start",
+        "outLink" : "start.ivp",
+        "tags" : "demo"
+      },
+      "visual" : {
+        "at" : { "x" : 128, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 384, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "DialogCall",
+      "name" : "TranslatorDemo",
+      "config" : {
+        "dialogId" : "google.translator.connector.demo.TranslatorDemo",
+        "startMethod" : "start(String)",
+        "call" : {
+          "params" : [
+            { "name" : "apiKey", "type" : "String" }
+          ],
+          "map" : {
+            "param.apiKey" : "\"AIzaSyCdZUS5nEOU8bMOmt94CZUpvSuIiRWGF2U\""
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    } ]
+}

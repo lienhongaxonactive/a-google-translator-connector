@@ -1,0 +1,6 @@
+RestClients:
+  Google Translator API:
+    UUID: a317ecbb-5d88-4a33-97c8-6b7fad341ab0
+    Url: https://translation.googleapis.com/language/translate/v2
+    Features:
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature

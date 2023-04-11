@@ -1,0 +1,8 @@
+Data #class
+google.translator.connector.demo #namespace
+translateText String #field
+translateText PERSISTENT #fieldModifier
+sourceLanguage String #field
+sourceLanguage PERSISTENT #fieldModifier
+targetLanguage String #field
+targetLanguage PERSISTENT #fieldModifier

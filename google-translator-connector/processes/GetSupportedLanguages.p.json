@@ -1,0 +1,83 @@
+{
+  "format" : "10.0.0",
+  "id" : "1874611482FBE920",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "google.translate.GetSupportedLanguagesData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "call(String,String)",
+      "config" : {
+        "callSignature" : "call",
+        "input" : {
+          "params" : [
+            { "name" : "apiKey", "type" : "String" },
+            { "name" : "displayLanguage", "type" : "String" }
+          ],
+          "map" : {
+            "out.apiKey" : "param.apiKey",
+            "out.displayLanguage" : "param.displayLanguage"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "supportedLanguages", "type" : "java.util.List<google.translate.functional.Language>" }
+          ],
+          "map" : {
+            "result.supportedLanguages" : "in.supportedLanguages"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f5" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f5",
+      "type" : "RestClientCall",
+      "name" : "Call Google Translator API",
+      "config" : {
+        "path" : "/languages",
+        "clientId" : "a317ecbb-5d88-4a33-97c8-6b7fad341ab0",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "key" : "in.apiKey",
+          "target" : "in.displayLanguage"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "resultType" : "com.fasterxml.jackson.databind.JsonNode",
+        "responseCode" : [
+          "import google.translate.functional.Language;",
+          "import com.fasterxml.jackson.databind.JsonNode;",
+          "import java.util.Iterator;",
+          "import com.fasterxml.jackson.databind.node.ArrayNode;",
+          "if (result != null && result.get(\"data\").get(\"languages\") != null) {",
+          "  ArrayNode languages = result.get(\"data\").get(\"languages\") as ArrayNode;",
+          "  if (languages != null && languages.elements() != null) {",
+          "    Iterator iterator = languages.elements();",
+          "    while(iterator.hasNext()) {",
+          "      ivy.log.debug(iterator.next());",
+          "      JsonNode node = iterator.next() as JsonNode;",
+          "      Language language = new google.translate.functional.Language();",
+          "      language.code = node.get(\"language\").asText();",
+          "      language.name = node.get(\"name\").asText();",
+          "      in.supportedLanguages.add(language);",
+          "    }",
+          "  }",
+          "}"
+        ]
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : { "id" : "f3", "to" : "f1" }
+    } ]
+}

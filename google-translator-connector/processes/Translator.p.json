@@ -1,0 +1,85 @@
+{
+  "format" : "10.0.0",
+  "id" : "1874570F31ED31E0",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "google.translate.TranslatorData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "call(String,String,String,String)",
+      "config" : {
+        "callSignature" : "call",
+        "input" : {
+          "params" : [
+            { "name" : "text", "type" : "String" },
+            { "name" : "sourceLanguage", "type" : "String" },
+            { "name" : "targetLanguage", "type" : "String" },
+            { "name" : "apiKey", "type" : "String" }
+          ],
+          "map" : {
+            "out.apiKey" : "param.apiKey",
+            "out.sourceLanguage" : "param.sourceLanguage",
+            "out.targetLanguage" : "param.targetLanguage",
+            "out.translateText" : "param.text"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "result", "type" : "String" }
+          ],
+          "map" : {
+            "result.result" : "in.result"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f3", "to" : "f5" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 360, "y" : 64 }
+      }
+    }, {
+      "id" : "f5",
+      "type" : "RestClientCall",
+      "name" : "Call Google Translator API",
+      "config" : {
+        "clientId" : "a317ecbb-5d88-4a33-97c8-6b7fad341ab0",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "queryParams" : {
+          "key" : "in.apiKey",
+          "target" : "in.targetLanguage",
+          "source" : "in.sourceLanguage",
+          "alt" : "\"json\"",
+          "q" : "in.translateText"
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "resultType" : "com.fasterxml.jackson.databind.JsonNode",
+        "responseCode" : [
+          "import google.translate.functional.Language;",
+          "import com.fasterxml.jackson.databind.JsonNode;",
+          "import java.util.Iterator;",
+          "import com.fasterxml.jackson.databind.node.ArrayNode;",
+          "if (result != null && result.get(\"data\").get(\"translations\") != null) {",
+          "  ArrayNode languages = result.get(\"data\").get(\"translations\") as ArrayNode;",
+          "  if (languages != null && languages.elements() != null) {",
+          "    Iterator iterator = languages.elements();",
+          "    if(iterator.hasNext()) {",
+          "      JsonNode node = iterator.next() as JsonNode;",
+          "      in.result = node.get(\"translatedText\").asText();",
+          "    }",
+          "  }",
+          "}"
+        ]
+      },
+      "visual" : {
+        "at" : { "x" : 232, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    } ]
+}
